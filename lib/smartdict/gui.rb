@@ -10,6 +10,8 @@ module Smartdict::Gui
   autoload :TranslateButton
   autoload :MenuBar
   autoload :TextView
+  autoload :StatusIcon
+  autoload :AboutWindow
 
   def run
     Smartdict::Gui::Controller.new.run

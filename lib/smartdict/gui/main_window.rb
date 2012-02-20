@@ -9,7 +9,7 @@ module Smartdict::Gui
 
       @controller = controller
 
-      signal_connect("delete_event") { false }
+      signal_connect("delete_event") { @controller.toggle_main_window }
       signal_connect("destroy") { @controller.quit }
 
       set_default_size(720, 450)
@@ -25,7 +25,6 @@ module Smartdict::Gui
 
     main_hpaned = Gtk::HPaned.new
       left_scrolled_win = Gtk::ScrolledWindow.new.
-                           #add(@word_list).
                            set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC)
       left_side_box = Gtk::VBox.new.
         pack_start(Gtk::VBox.new.
