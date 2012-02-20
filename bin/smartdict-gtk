@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+require 'rubygems'
+require 'bundler'
+
+Bundler.setup(:default, :development)
+
+require 'smartdict-core'
+require 'smartdict-gtk'
+
+Smartdict.env = :user
+
+Smartdict.run
+Smartdict::Gui.run
