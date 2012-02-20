@@ -2,7 +2,8 @@ require 'benchmark'
 
 module Smartdict::Gui
   class Controller
-    attr_reader :main_window, :word_entry, :translate_button, :menu_bar, :text_view, :status_icon
+    attr_reader :main_window, :word_entry, :translate_button, :menu_bar, :text_view, :status_icon,
+                :from_lang_combo_box
 
     def initialize
       @main_window      = MainWindow.new(self)
@@ -11,6 +12,7 @@ module Smartdict::Gui
       @menu_bar         = MenuBar.new(self)
       @text_view        = TextView.new(self)
       @status_icon      = StatusIcon.new(self)
+      @from_lang_combo_box = FromLangComboBox.new(self)
     end
 
     def run

@@ -2,7 +2,8 @@ module Smartdict::Gui
   class MainWindow < ::Gtk::Window
     extend Forwardable
 
-    def_delegators :@controller, :menu_bar, :word_entry, :translate_button, :text_view
+    def_delegators :@controller, :menu_bar, :word_entry, :translate_button, :text_view,
+                                 :from_lang_combo_box
 
     def initialize(controller)
       super("Smartdict")
@@ -31,6 +32,7 @@ module Smartdict::Gui
           pack_start(word_entry, false, false).
           pack_start(Gtk::HBox.new.
             pack_start(translate_button).
+            pack_start(from_lang_combo_box).
             set_border_width(10), false, false
           ).
           set_border_width(10), false, false
