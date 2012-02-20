@@ -1,5 +1,5 @@
 PATH
-  remote: /home/spotapov/dev/my/smartdict-core
+  remote: /home/blake/dev/my/smartdict/smartdict-core
   specs:
     smartdict-core (0.0.0)
       activesupport

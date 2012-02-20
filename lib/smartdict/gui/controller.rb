@@ -28,11 +28,9 @@ module Smartdict::Gui
     def translate
       word = @word_entry.text.strip.downcase
       translation = Smartdict::Translator.translate(word)
-      output = format.format_translation(translation)
+      @text_view.show_translation(translation)
     rescue Smartdict::TranslationNotFound => err
-      output = err.message
-    ensure
-      @text_view.buffer.text = output
+      @text_view.buffer.text = err.message
     end
 
     def toggle_main_window
@@ -41,15 +39,6 @@ module Smartdict::Gui
 
     def open_about_window
       AboutWindow.new
-    end
-
-
-
-
-    private
-
-    def format
-      Smartdict::Formats::TextFormat
     end
 
   end

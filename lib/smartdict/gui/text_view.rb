@@ -1,11 +1,14 @@
-module Smartdict::Gui
-  class TextView < ::Gtk::TextView
+class Smartdict::Gui::TextView < ::Gtk::TextView
+  extend ActiveSupport::Autoload
+  autoload :Buffer
 
-    def initialize(controller)
-      super(Gtk::TextBuffer.new)
-      @controller = controller
-      self.editable = false
-    end
+  def initialize(controller)
+    super(Buffer.new)
+    @controller = controller
+    self.editable = false
+  end
 
+  def show_translation(translation)
+    buffer.set_translation(translation)
   end
 end
