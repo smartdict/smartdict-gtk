@@ -13,6 +13,7 @@ module Smartdict::Gui
   autoload :StatusIcon
   autoload :AboutWindow
   autoload :LangComboBox
+  autoload :InterchangeButton
 
   def run
     Smartdict::Gui::Controller.new.run

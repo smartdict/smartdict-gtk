@@ -2,8 +2,11 @@ require 'benchmark'
 
 module Smartdict::Gui
   class Controller
+    extend ActiveSupport::Autoload
+    autoload :Config
+
     attr_reader :main_window, :word_entry, :translate_button, :menu_bar, :text_view, :status_icon,
-                :from_lang_combo_box, :to_lang_combo_box
+                :from_lang_combo_box, :to_lang_combo_box, :interchange_button
 
     def initialize
       @main_window      = MainWindow.new(self)
@@ -12,8 +15,9 @@ module Smartdict::Gui
       @menu_bar         = MenuBar.new(self)
       @text_view        = TextView.new(self)
       @status_icon      = StatusIcon.new(self)
-      @from_lang_combo_box = LangComboBox.new(self, 'en') {|i| Smartdict::Translator.from_lang_code = langs[i] }
-      @to_lang_combo_box   = LangComboBox.new(self, 'ru') {|i| Smartdict::Translator.to_lang_code = langs[i] }
+      @from_lang_combo_box = LangComboBox.new(self, config.from_lang) {|lang| Smartdict::Translator.from_lang_code = lang }
+      @to_lang_combo_box   = LangComboBox.new(self, config.to_lang) {|lang| Smartdict::Translator.to_lang_code = lang }
+      @interchange_button = InterchangeButton.new(self)
     end
 
     def run
@@ -42,11 +46,15 @@ module Smartdict::Gui
       AboutWindow.new
     end
 
-    # TODO: should be removed to configurations
-    # TODO: refactor LangComboBox as well.
-    def langs
-      %w(en ru de es fr zh)
+    def interchange_langs
+      @to_lang_combo_box.active, @from_lang_combo_box.active = @from_lang_combo_box.active, @to_lang_combo_box.active
     end
 
+
+    private
+
+    def config
+      @config ||= Config.new
+    end
   end
 end
