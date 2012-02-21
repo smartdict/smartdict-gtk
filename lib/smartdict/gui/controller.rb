@@ -3,7 +3,7 @@ require 'benchmark'
 module Smartdict::Gui
   class Controller
     attr_reader :main_window, :word_entry, :translate_button, :menu_bar, :text_view, :status_icon,
-                :from_lang_combo_box
+                :from_lang_combo_box, :to_lang_combo_box
 
     def initialize
       @main_window      = MainWindow.new(self)
@@ -12,7 +12,8 @@ module Smartdict::Gui
       @menu_bar         = MenuBar.new(self)
       @text_view        = TextView.new(self)
       @status_icon      = StatusIcon.new(self)
-      @from_lang_combo_box = FromLangComboBox.new(self)
+      @from_lang_combo_box = LangComboBox.new(self, 'en') {|i| Smartdict::Translator.from_lang_code = langs[i] }
+      @to_lang_combo_box   = LangComboBox.new(self, 'ru') {|i| Smartdict::Translator.to_lang_code = langs[i] }
     end
 
     def run
@@ -39,6 +40,12 @@ module Smartdict::Gui
 
     def open_about_window
       AboutWindow.new
+    end
+
+    # TODO: should be removed to configurations
+    # TODO: refactor LangComboBox as well.
+    def langs
+      %w(en ru de es fr zh)
     end
 
   end

@@ -12,7 +12,7 @@ module Smartdict::Gui
   autoload :TextView
   autoload :StatusIcon
   autoload :AboutWindow
-  autoload :FromLangComboBox
+  autoload :LangComboBox
 
   def run
     Smartdict::Gui::Controller.new.run
