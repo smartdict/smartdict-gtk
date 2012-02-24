@@ -46,6 +46,17 @@ module Smartdict::Gui
       AboutWindow.new
     end
 
+    def open_export_dialog
+      ExportDialog.new(self)
+    end
+
+    def export_translations(format, file_path)
+      puts "EXPORT TRANSLATIONS"
+      puts format
+      puts file_path
+      puts
+    end
+
     def interchange_langs
       @to_lang_combo_box.active, @from_lang_combo_box.active = @from_lang_combo_box.active, @to_lang_combo_box.active
     end

@@ -10,8 +10,11 @@ module Smartdict::Gui
 
 	file_exit_item = Gtk::MenuItem.new("_Exit")
 	  file_exit_item.signal_connect("activate") {@controller.quit}
+        file_export_item = Gtk::MenuItem.new("_Export")
+          file_export_item.signal_connect("activate") { @controller.open_export_dialog }
 
 	file_menu = Gtk::Menu.new
+	file_menu.add(file_export_item)
 	file_menu.add(file_exit_item)
 	file_menu_item.submenu = file_menu
 

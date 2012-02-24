@@ -14,6 +14,7 @@ module Smartdict::Gui
   autoload :AboutWindow
   autoload :LangComboBox
   autoload :InterchangeButton
+  autoload :ExportDialog
 
   def run
     Smartdict::Gui::Controller.new.run
