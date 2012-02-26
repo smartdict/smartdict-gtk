@@ -50,11 +50,11 @@ module Smartdict::Gui
       ExportDialog.new(self)
     end
 
-    def export_translations(format, file_path)
-      puts "EXPORT TRANSLATIONS"
-      puts format
-      puts file_path
-      puts
+    def export_translations(format_name, file_path)
+      format = Smartdict::Core::FormatManager.instance.find_format(format_name)
+      translations = Smartdict::ListBuilder.build(:since => Date.today)
+      content = format.format_list(translations)
+      File.open(file_path, 'w') { |file| file.write content }
     end
 
     def interchange_langs
