@@ -10,6 +10,10 @@ gem 'smartdict-core', :path => "/home/blake/dev/my/smartdict/smartdict-core"
 #gem 'smartdict-core', :path => "/home/spotapov/dev/my/smartdict-core"
 gem 'gtk2'
 
+
+# core dependecies
+gem 'dm-enum'
+
 group :development do
   gem "rspec", "~> 2.3.0"
   gem "bundler", "~> 1.0.0"

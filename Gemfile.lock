@@ -30,6 +30,8 @@ GEM
     dm-do-adapter (1.2.0)
       data_objects (~> 0.10.6)
       dm-core (~> 1.2.0)
+    dm-enum (0.0.3)
+      dm-core
     dm-migrations (1.2.0)
       dm-core (~> 1.2.0)
     dm-sqlite-adapter (1.2.0)
@@ -74,6 +76,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.0.0)
+  dm-enum
   gtk2
   jeweler (~> 1.6.4)
   rspec (~> 2.3.0)

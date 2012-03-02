@@ -1,6 +1,8 @@
 class Smartdict::Gui::Controller::Config
+  include Smartdict::Models
+
   def lang_names
-    @lang_names ||= langs.map{|code| Smartdict::Models::Language.first(:code => code).name }
+    @lang_names ||= langs.map{|code| Language[code].name }
   end
 
   def langs
