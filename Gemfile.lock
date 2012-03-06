@@ -12,12 +12,13 @@ PATH
 GEM
   remote: http://rubygems.org/
   specs:
-    activesupport (3.2.1)
+    activesupport (3.2.2)
       i18n (~> 0.6)
       multi_json (~> 1.0)
     addressable (2.2.7)
     atk (1.1.2)
       glib2 (>= 1.1.2)
+    builder (3.0.0)
     cairo (1.10.2)
       pkg-config
     configatron (2.9.0)
@@ -75,6 +76,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  builder
   bundler (~> 1.0.0)
   dm-enum
   gtk2

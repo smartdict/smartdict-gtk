@@ -13,6 +13,7 @@ gem 'gtk2'
 
 # core dependecies
 gem 'dm-enum'
+gem 'builder'
 
 group :development do
   gem "rspec", "~> 2.3.0"
