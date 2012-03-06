@@ -6,6 +6,10 @@
 Debian packages: 
 
 * libglib2.0-dev
+* ligatk1.0-dev
+* libcairo-dev
+* libsqlite3-dev
+* libpango1.0-dev
 
 ## Contributing to smartdict-gtk
  
