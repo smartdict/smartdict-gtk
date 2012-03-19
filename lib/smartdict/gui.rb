@@ -16,6 +16,9 @@ module Smartdict::Gui
   autoload :InterchangeButton
   autoload :ExportDialog
 
+
+  LEFT_BOX_BUTTON_HEIGHT = 36
+
   def run
     Smartdict::Gui::Controller.new.run
   end

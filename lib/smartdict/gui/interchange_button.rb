@@ -1,4 +1,6 @@
 class Smartdict::Gui::InterchangeButton < ::Gtk::Button
+  include Smartdict::Gui
+
   def initialize(controller)
     super('')
 
@@ -8,5 +10,7 @@ class Smartdict::Gui::InterchangeButton < ::Gtk::Button
     image = Gtk::Image.new(Smartdict::Gui.icons_dir + "/interchange.png")
     set_image image
     image.show
+
+    set_size_request(60, LEFT_BOX_BUTTON_HEIGHT)
   end
 end

@@ -18,6 +18,9 @@ class Smartdict::Gui::MainWindow < ::Gtk::Window
 
 
   def draw_window
+   vertical_span = 3
+   left_box_border = 10
+
     main_box = Gtk::VBox.new.
       pack_start(menu_bar, false, false, 0)
 
@@ -28,16 +31,18 @@ class Smartdict::Gui::MainWindow < ::Gtk::Window
 
     left_side_box = Gtk::VBox.new.
       pack_start(Gtk::VBox.new.
-	pack_start(word_entry, false, false).
+	pack_start(Gtk::HBox.new.
+	  pack_start(word_entry).
+	  set_border_width(vertical_span), false, false).
 	pack_start(Gtk::HBox.new.
 	  pack_start(translate_button).
-	  set_border_width(5), false, false).
+	  set_border_width(vertical_span), false, false).
 	pack_start(Gtk::HBox.new.
 	  pack_start(from_lang_combo_box).
 	  pack_start(interchange_button).
 	  pack_start(to_lang_combo_box).
-	  set_border_width(5), false, false).
-	set_border_width(10), false, false).
+	  set_border_width(vertical_span), false, false).
+	set_border_width(left_box_border), false, false).
       pack_start(left_scrolled_win, true, true)
 
     right_scrolled_win = Gtk::ScrolledWindow.new.

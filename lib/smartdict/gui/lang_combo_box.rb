@@ -1,5 +1,6 @@
 class Smartdict::Gui::LangComboBox < ::Gtk::ComboBox
   extend Forwardable
+  include Smartdict::Gui
 
   def_delegator :@controller, :config
 
@@ -16,6 +17,8 @@ class Smartdict::Gui::LangComboBox < ::Gtk::ComboBox
       lang_code = config.langs[active]
       @on_change_block.call(lang_code)
     end
+
+    set_size_request(100, LEFT_BOX_BUTTON_HEIGHT)
   end
 
 end

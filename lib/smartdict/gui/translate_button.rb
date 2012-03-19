@@ -5,6 +5,7 @@ module Smartdict::Gui
       super("Translate")
       @controller = controller
       signal_connect('clicked') { @controller.translate }
+      set_size_request(100, LEFT_BOX_BUTTON_HEIGHT)
     end
 
   end
