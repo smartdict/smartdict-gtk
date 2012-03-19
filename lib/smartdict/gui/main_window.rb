@@ -19,7 +19,7 @@ class Smartdict::Gui::MainWindow < ::Gtk::Window
 
   def draw_window
    vertical_span = 3
-   left_box_border = 10
+   left_box_border = 3
 
     main_box = Gtk::VBox.new.
       pack_start(menu_bar, false, false, 0)

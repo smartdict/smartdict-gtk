@@ -39,7 +39,7 @@ class Smartdict::Gui::ExportDialog < ::Gtk::FileChooserDialog
     table.column_spacings = 5
     table.border_width = 10
 
-    table.attach_defaults(format_label, 0, 1, 0, 1)
+    table.attach(format_label, 0, 1, 0, 1, Gtk::SHRINK, Gtk::SHRINK, 0, 0)
     table.attach_defaults(@format_combo_box, 1, 2, 0, 1)
 
     table
