@@ -7,7 +7,7 @@ class Smartdict::Gui::InterchangeButton < ::Gtk::Button
     @controller = controller
     signal_connect('clicked') { @controller.interchange_langs }
 
-    image = Gtk::Image.new(Smartdict::Gui.icons_dir + "/interchange.png")
+    image = Gtk::Image.new(Icons.interchange)
     set_image image
     image.show
 

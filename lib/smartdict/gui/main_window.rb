@@ -1,5 +1,6 @@
 class Smartdict::Gui::MainWindow < ::Gtk::Window
   extend Forwardable
+  include Smartdict::Gui
 
   def_delegators :@controller, :menu_bar, :word_entry, :translate_button, :text_view,
 			       :from_lang_combo_box, :to_lang_combo_box, :interchange_button
@@ -13,7 +14,7 @@ class Smartdict::Gui::MainWindow < ::Gtk::Window
     signal_connect("destroy") { @controller.quit }
 
     set_default_size(720, 450)
-    set_icon(Smartdict::Gui.icons_dir + "/logo.png")
+    set_icon(Icons.logo)
   end
 
 
