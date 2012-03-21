@@ -16,14 +16,12 @@ module Smartdict::Gui
   autoload :InterchangeButton
   autoload :ExportDialog
 
+  autoload :Icons
+
 
   LEFT_BOX_BUTTON_HEIGHT = 36
 
   def run
     Smartdict::Gui::Controller.new.run
-  end
-
-  def icons_dir
-    File.expand_path("../../../icons", __FILE__)
   end
 end
