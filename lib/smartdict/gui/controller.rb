@@ -18,6 +18,9 @@ module Smartdict::Gui
       @from_lang_combo_box = LangComboBox.new(self, config.from_lang) {|lang| Smartdict::Translator.from_lang_code = lang }
       @to_lang_combo_box   = LangComboBox.new(self, config.to_lang) {|lang| Smartdict::Translator.to_lang_code = lang }
       @interchange_button = InterchangeButton.new(self)
+
+      #open_export_dialog
+      #exit
     end
 
     def run
@@ -50,9 +53,9 @@ module Smartdict::Gui
       ExportDialog.new(self)
     end
 
-    def export_translations(format_name, file_path)
+    def export_translations(format_name, file_path, options = {})
       format = Smartdict::Core::FormatManager.instance.find_format(format_name)
-      translations = Smartdict::ListBuilder.build(:since => Date.today)
+      translations = Smartdict::ListBuilder.build(options)
       content = format.format_list(translations)
       File.open(file_path, 'w') { |file| file.write content }
     end
