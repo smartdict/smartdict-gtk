@@ -1,5 +1,5 @@
 PATH
-  remote: /home/blake/dev/my/smartdict/smartdict-core
+  remote: /home/spotapov/dev/my/smartdict/smartdict-core
   specs:
     smartdict-core (0.0.0)
       activesupport
@@ -8,6 +8,11 @@ PATH
       dm-migrations
       dm-sqlite-adapter
       dm-validations
+
+PATH
+  remote: /home/spotapov/dev/my/smartdict/smartdict-icons
+  specs:
+    smartdict-icons (0.0.0)
 
 GEM
   remote: http://rubygems.org/
@@ -83,3 +88,4 @@ DEPENDENCIES
   jeweler (~> 1.6.4)
   rspec (~> 2.3.0)
   smartdict-core!
+  smartdict-icons!

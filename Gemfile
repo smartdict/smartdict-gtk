@@ -6,8 +6,9 @@ source "http://rubygems.org"
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
 
-gem 'smartdict-core', :path => "/home/blake/dev/my/smartdict/smartdict-core"
-#gem 'smartdict-core', :path => "/home/spotapov/dev/my/smartdict-core"
+#gem 'smartdict-core', :path => "/home/blake/dev/my/smartdict/smartdict-core"
+gem 'smartdict-core', :path => "/home/spotapov/dev/my/smartdict/smartdict-core"
+gem 'smartdict-icons', :path => "/home/spotapov/dev/my/smartdict/smartdict-icons"
 gem 'gtk2'
 
 

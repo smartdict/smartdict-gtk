@@ -6,7 +6,7 @@ module Smartdict::Gui
       super()
 
       build_menu
-      self.pixbuf = Gdk::Pixbuf.new(Icons.logo)
+      self.pixbuf = Gdk::Pixbuf.new(Smartdict::Icons.logo)
 
       signal_connect('activate'){@controller.toggle_main_window}
 

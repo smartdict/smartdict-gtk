@@ -7,6 +7,7 @@ require 'bundler'
 Bundler.setup(:default, :development)
 
 require 'smartdict-core'
+require 'smartdict-icons'
 require 'smartdict-gtk'
 
 Smartdict.env = :user

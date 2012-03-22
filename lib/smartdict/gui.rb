@@ -16,8 +16,6 @@ module Smartdict::Gui
   autoload :InterchangeButton
   autoload :ExportDialog
 
-  autoload :Icons
-
 
   LEFT_BOX_BUTTON_HEIGHT = 36
 
