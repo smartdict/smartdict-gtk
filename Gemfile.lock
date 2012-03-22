@@ -1,5 +1,5 @@
 PATH
-  remote: /home/spotapov/dev/my/smartdict/smartdict-core
+  remote: /home/blake/dev/my/smartdict/smartdict-core
   specs:
     smartdict-core (0.0.0)
       activesupport
@@ -10,7 +10,7 @@ PATH
       dm-validations
 
 PATH
-  remote: /home/spotapov/dev/my/smartdict/smartdict-icons
+  remote: /home/blake/dev/my/smartdict/smartdict-icons
   specs:
     smartdict-icons (0.0.0)
 
