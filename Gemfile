@@ -1,9 +1,7 @@
 source "http://rubygems.org"
 
-
 def local_gem(gem_name)
   path = File.expand_path("../../#{gem_name}", __FILE__)
-  puts path
   gem gem_name, :path => path
 end
 

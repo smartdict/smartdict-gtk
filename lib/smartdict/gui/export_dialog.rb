@@ -3,11 +3,21 @@ class Smartdict::Gui::ExportDialog < ::Gtk::FileChooserDialog
 
   autoload :FormatComboBox
 
+
+  class Label < Gtk::Label
+    def initialize(title)
+      super
+      set_markup("<b>#{title}</b>")
+    end
+  end
+
+
   DATE_RANGES =  {
-    "Today" => lambda { Date.today },
-    "Week"  => lambda { 1.week.ago },
+    "Today" => lambda { Date.today  },
+    "Week"  => lambda { 1.week.ago  },
     "Month" => lambda { 1.month.ago }
   }
+
 
   def initialize(controller)
     @controller = controller
@@ -46,44 +56,30 @@ class Smartdict::Gui::ExportDialog < ::Gtk::FileChooserDialog
     end
   end
 
+  # @return [Gtk::Table]
   def options_table
-    format_label = Label.new("Format:")
-    @format_combo_box = FormatComboBox.new
+    table_width = DATE_RANGES.size + 2
 
-    date_range_label = Label.new("Date range:")
-    init_date_range_buttons
-
-    from_lang_label = Label.new("From language:")
-    from_lang_combo_box = LangComboBox.new(@controller)
-
-    to_lang_label = Label.new("To language:")
-    to_lang_combo_box = LangComboBox.new(@controller)
-
-    table = Gtk::Table.new(4, 4, false)
-    table.row_spacings = 5
+    # Create table itself
+    table = Gtk::Table.new(table_width, 2, false)
     table.column_spacings = 5
-    table.border_width = 10
 
     # Format
+    format_label = Label.new("Format:")
+    @format_combo_box = FormatComboBox.new
     table.attach(format_label, 0, 1, 0, 1, Gtk::SHRINK, Gtk::SHRINK, 0, 0)
-    table.attach_defaults(@format_combo_box, 1, 4, 0, 1)
-
-
-    # From lang
-    table.attach(from_lang_label, 0, 1, 1, 2, Gtk::SHRINK, Gtk::SHRINK, 0, 0)
-    table.attach_defaults(from_lang_combo_box, 1, 4, 1, 2)
-
-    # To lang
-    table.attach(to_lang_label, 0, 1, 2, 3, Gtk::SHRINK, Gtk::SHRINK, 0, 0)
-    table.attach_defaults(to_lang_combo_box, 1, 4, 2, 3)
+    table.attach_defaults(@format_combo_box, 1, table_width, 0, 1)
 
     # Date range
-    table.attach(date_range_label, 0, 1, 3, 4, Gtk::SHRINK, Gtk::SHRINK, 0, 0)
+    date_range_label = Label.new("Date range:")
+    init_date_range_buttons
+    table.attach(date_range_label, 0, 1, 1, 2, Gtk::SHRINK, Gtk::SHRINK, 0, 0)
     @date_range_buttons.keys.each_with_index do |button, index|
-      table.attach(button, index+1, index+2, 3, 4, Gtk::SHRINK, Gtk::SHRINK, 0, 0)
+      table.attach(button, index+1, index+2, 1, 2, Gtk::SHRINK, Gtk::SHRINK, 0, 0)
     end
 
-    table
+    # A trick to make radio buttons have left alignment
+    table.attach_defaults(Label.new(''), table_width-1, table_width, 1, 2)
   end
 
   def since_date
@@ -91,27 +87,4 @@ class Smartdict::Gui::ExportDialog < ::Gtk::FileChooserDialog
       return block.call if button.active?
     end
   end
-
-  class Label < Gtk::Label
-    def initialize(title)
-      super
-      set_markup("<b>#{title}</b>")
-    end
-  end
-
-
-  class LangComboBox < ::Gtk::ComboBox
-    extend Forwardable
-
-    def_delegator :@controller, :config
-
-    def initialize(controller)
-
-      @controller = controller
-      super(true)
-
-      config.lang_names.each {|name| append_text(name) }
-    end
-  end
-
 end
