@@ -42,7 +42,12 @@ module Smartdict::Gui
     end
 
     def toggle_main_window
-      @main_window.visible? ? @main_window.hide_all : @main_window.show_all
+      if @main_window.visible? and @main_window.active?
+        @main_window.hide_all
+      else
+        @main_window.show_all
+        @main_window.present
+      end
     end
 
     def open_about_window
