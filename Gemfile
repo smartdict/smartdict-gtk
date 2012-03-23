@@ -1,16 +1,14 @@
 source "http://rubygems.org"
-# Add dependencies required to use your gem here.
-# Example:
-#   gem "activesupport", ">= 2.3.5"
 
-# Add dependencies to develop your gem here.
-# Include everything needed to run rake, tests, features, etc.
+def local_gem(gem_name)
+  path = File.expand_path("../../#{gem_name}", __FILE__)
+  gem gem_name, :path => path
+end
 
-#gem 'smartdict-core', :path => "/home/blake/dev/my/smartdict/smartdict-core"
-gem 'smartdict-core', :path => "/home/spotapov/dev/my/smartdict/smartdict-core"
-gem 'smartdict-icons', :path => "/home/spotapov/dev/my/smartdict/smartdict-icons"
+local_gem "smartdict-core"
+local_gem "smartdict-icons"
+
 gem 'gtk2'
-
 
 # core dependecies
 gem 'dm-enum'
