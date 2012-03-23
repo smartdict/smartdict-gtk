@@ -82,7 +82,7 @@ PLATFORMS
 
 DEPENDENCIES
   builder
-  bundler (~> 1.0.0)
+  bundler (~> 1.1.2)
   dm-enum
   gtk2
   jeweler (~> 1.6.4)
