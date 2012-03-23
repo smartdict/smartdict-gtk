@@ -12,6 +12,6 @@ class Smartdict::Gui::ExportDialog::FormatComboBox < ::Gtk::ComboBox
   end
 
   def format_names
-    Smartdict::Core::FormatManager.instance.formats.keys
+    Smartdict::Core::FormatManager.all.keys
   end
 end

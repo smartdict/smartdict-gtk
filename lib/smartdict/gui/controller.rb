@@ -59,7 +59,7 @@ module Smartdict::Gui
     end
 
     def export_translations(format_name, file_path, options = {})
-      format = Smartdict::Core::FormatManager.instance.find_format(format_name)
+      format = Smartdict::Core::FormatManager[format_name]
       translations = Smartdict::ListBuilder.build(options)
       content = format.format_list(translations)
       File.open(file_path, 'w') { |file| file.write content }
