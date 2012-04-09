@@ -2,9 +2,10 @@
 
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'rubygems'
-require 'bundler'
 
-Bundler.setup(:default, :development)
+# For development
+# require 'bundler'
+# Bundler.setup(:default, :development)
 
 require 'smartdict-core'
 require 'smartdict-icons'

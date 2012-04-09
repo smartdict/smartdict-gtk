@@ -1,7 +1,7 @@
 PATH
   remote: /home/blake/dev/my/smartdict/smartdict-core
   specs:
-    smartdict-core (0.0.1)
+    smartdict-core (0.0.2)
       activesupport
       builder
       configatron
