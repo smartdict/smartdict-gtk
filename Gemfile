@@ -8,7 +8,7 @@ end
 local_gem "smartdict-core"
 local_gem "smartdict-icons"
 
-gem 'gtk2'
+gem 'gtk2', "1.1.2"
 
 # core dependecies
 gem 'dm-enum'

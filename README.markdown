@@ -1,9 +1,14 @@
 # smartdict-gtk
 
 
-## Dependecies
+## Installation
 
-Debian packages: 
+### Prerequisites
+
+
+#### Debian/Ubuntu
+
+On Debian/Ubuntu you need to install the next packages:
 
 * libglib2.0-dev
 * ligatk1.0-dev
@@ -11,17 +16,30 @@ Debian packages:
 * libsqlite3-dev
 * libpango1.0-dev
 
-## Contributing to smartdict-gtk
- 
-* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
-* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
-* Fork the project
-* Start a feature/bugfix branch
-* Commit and push until you are happy with your contribution
-* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+To do that run:
+
+```
+apt-get install libglib2.0-dev ligatk1.0-dev libcairo-dev libsqlite3-dev libpango1.0-dev
+```
+
+Please report if you have issues or it's not complete list of required dependencies.
+
+
+### Ruby version
+
+Tested on MRI 1.9.3-p125
+
+
+### Install the gem
+
+```
+gem install smartdict-gtk
+```
+
+
 
 ## Copyright
 
-Copyright (c) 2012 Potapov Sergey. See LICENSE.txt for
-further details.
+Copyright (c) 2012 Potapov Sergey. The software is distributed under
+[GNU GeneralPublic License version 2](http://www.gnu.org/licenses/gpl-2.0.txt).
+See GPL-LICENSE.txt file for more details.
