@@ -2,7 +2,8 @@ class Smartdict::Gui::MainWindow < ::Gtk::Window
   extend Forwardable
 
   def_delegators :@controller, :menu_bar, :word_entry, :translate_button, :text_view,
-			       :from_lang_combo_box, :to_lang_combo_box, :interchange_button
+			       :from_lang_combo_box, :to_lang_combo_box, :interchange_button,
+                               :word_list
 
   def initialize(controller)
     super("Smartdict")
@@ -27,6 +28,7 @@ class Smartdict::Gui::MainWindow < ::Gtk::Window
     main_hpaned = Gtk::HPaned.new
 
     left_scrolled_win = Gtk::ScrolledWindow.new.
+      add(word_list).
       set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC)
 
     left_side_box = Gtk::VBox.new.

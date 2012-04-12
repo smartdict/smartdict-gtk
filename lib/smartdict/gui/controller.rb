@@ -6,7 +6,7 @@ module Smartdict::Gui
     autoload :Config
 
     attr_reader :main_window, :word_entry, :translate_button, :menu_bar, :text_view, :status_icon,
-                :from_lang_combo_box, :to_lang_combo_box, :interchange_button
+                :from_lang_combo_box, :to_lang_combo_box, :interchange_button, :word_list
 
     def initialize
       @main_window      = MainWindow.new(self)
@@ -18,6 +18,7 @@ module Smartdict::Gui
       @from_lang_combo_box = LangComboBox.new(self, config.from_lang) {|lang| Smartdict::Translator.from_lang_code = lang }
       @to_lang_combo_box   = LangComboBox.new(self, config.to_lang) {|lang| Smartdict::Translator.to_lang_code = lang }
       @interchange_button = InterchangeButton.new(self)
+      @word_list          = WordList.new(self)
 
       #open_export_dialog
       #exit
@@ -37,8 +38,17 @@ module Smartdict::Gui
       word = @word_entry.text.strip.downcase
       translation = Smartdict::Translator.translate(word)
       @text_view.show_translation(translation)
+      @word_list.prepend_word(translation)
     rescue Smartdict::TranslationNotFound => err
       @text_view.buffer.text = err.message
+    end
+
+    # @param [String] word
+    # @param [String] from_lang language code
+    # @param [String] to_lang language code
+    def translate_selected_word(word, from_lang, to_lang)
+      translation = Smartdict::Translator.translate(word)
+      @text_view.show_translation(translation)
     end
 
     def toggle_main_window
