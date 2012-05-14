@@ -38,7 +38,7 @@ module Smartdict::Gui
       word = @word_entry.text.strip.downcase
       translation = Smartdict::Translator.translate(word)
       @text_view.show_translation(translation)
-      @word_list.prepend_word(translation)
+      add_to_history(translation)
     rescue Smartdict::TranslationNotFound => err
       @text_view.buffer.text = err.message
     end
@@ -84,6 +84,10 @@ module Smartdict::Gui
 
     def config
       @config ||= Config.new
+    end
+
+    def add_to_history(translation)
+      @word_list.prepend_word(translation) unless @word_list.first_item_matches?(translation)
     end
   end
 end
