@@ -15,8 +15,7 @@ class Smartdict::Gui::WordList < ::Gtk::TreeView
       # set options of column
       self.resizable      = true
       self.clickable      = true
-      self.sort_indicator = false
-      self.sort_column_id = column_id
+      self.reorderable    = false
     end
   end
 
