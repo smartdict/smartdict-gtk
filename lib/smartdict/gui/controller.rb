@@ -1,5 +1,3 @@
-require 'benchmark'
-
 module Smartdict::Gui
   class Controller
     extend ActiveSupport::Autoload
@@ -9,19 +7,26 @@ module Smartdict::Gui
                 :from_lang_combo_box, :to_lang_combo_box, :interchange_button, :word_list
 
     def initialize
+      @translator = Smartdict::Translator.new(
+        :from_lang => config.from_lang,
+        :to_lang   => config.to_lang,
+        :log       => true
+      )
+
       @main_window      = MainWindow.new(self)
       @word_entry       = WordEntry.new(self)
       @translate_button = TranslateButton.new(self)
       @menu_bar         = MenuBar.new(self)
       @text_view        = TextView.new(self)
       @status_icon      = StatusIcon.new(self)
-      @from_lang_combo_box = LangComboBox.new(self, config.from_lang) {|lang| Smartdict::Translator.from_lang_code = lang }
-      @to_lang_combo_box   = LangComboBox.new(self, config.to_lang) {|lang| Smartdict::Translator.to_lang_code = lang }
+      @from_lang_combo_box = LangComboBox.new(self, config.from_lang) do |lang|
+        @translator.default_opts[:from_lang] = lang
+      end
+      @to_lang_combo_box = LangComboBox.new(self, config.to_lang) do |lang|
+        @translator.default_opts[:to_lang] = lang
+      end
       @interchange_button = InterchangeButton.new(self)
       @word_list          = WordList.new(self)
-
-      #open_export_dialog
-      #exit
     end
 
     def run
@@ -36,18 +41,23 @@ module Smartdict::Gui
 
     def translate
       word = @word_entry.text.strip.downcase
-      translation = Smartdict::Translator.translate(word)
+      translation = @translator.translate(word)
       @text_view.show_translation(translation)
       add_to_history(translation)
-    rescue Smartdict::TranslationNotFound => err
-      @text_view.buffer.text = err.message
+    #rescue Smartdict::TranslationNotFound => err
+    #  @text_view.buffer.text = err.message
+    rescue Exception => err
+      msg = "An error occured\n"
+      msg << "#{err.message}\n\n"
+      msg << err.backtrace.join("\n")
+      @text_view.buffer.text = msg
     end
 
     # @param [String] word
     # @param [String] from_lang language code
     # @param [String] to_lang language code
     def translate_selected_word(word, from_lang, to_lang)
-      translation = Smartdict::Translator.translate(word)
+      translation = @translator.translate(word)
       @text_view.show_translation(translation)
     end
 

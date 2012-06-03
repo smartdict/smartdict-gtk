@@ -1,5 +1,12 @@
 #!/usr/bin/env ruby
 
+# For development
+parent_dir = File.expand_path('../../../', __FILE__)
+Dir["#{parent_dir}/smartdict-*/lib"].each do |lib_dir|
+  $LOAD_PATH.unshift(lib_dir) if Dir.exists?(lib_dir)
+end
+
+
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'rubygems'
 
