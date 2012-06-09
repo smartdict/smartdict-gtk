@@ -10,13 +10,15 @@ class Smartdict::Gui::AboutWindow < Gtk::AboutDialog
   end
 
   def set_info
-    self.name         = "Smartdict 2"
+    info = Smartdict.info
+    self.name         = "smartdict-gtk"
     self.program_name = "Smartdict"
-    self.version      = Smartdict::VERSION
-    self.copyright    = "Potapov Sergey (greyblake)"
-    self.authors      = ["Potapov Sergey"]
-    self.comments     = "Simple dictionary"
-    self.website      = "https://github.com/smartdict/smartdict"
+    self.version      = Smartdict::Gui::VERSION
+    self.copyright    = info.author
+    self.authors      = [info.author]
+    self.comments     = "Core v#{info.version}\nSimple dictionary"
+    self.website      = info.url
+    self.logo         = Gdk::Pixbuf.new(Smartdict::Icons.logo, 128, 128)
   end
 
   def set_license
