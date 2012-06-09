@@ -9,13 +9,17 @@ local_gem "smartdict-core"
 local_gem "smartdict-icons"
 
 gem 'gtk2', "1.1.2"
+gem 'activesupport', "~> 3.2.0"
 
 # core dependecies
 gem 'dm-enum'
 gem 'builder'
 
 group :development do
-  gem "rspec", "~> 2.3.0"
+  gem "rspec", "~> 2.7"
   gem "bundler", "~> 1.1.2"
   gem "jeweler", "~> 1.6.4"
+
+  # For cucumber testing
+  gem 'aruba', '0.4.11'
 end

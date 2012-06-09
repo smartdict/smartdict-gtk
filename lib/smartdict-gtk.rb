@@ -1,1 +1,7 @@
-require File.expand_path('../smartdict', __FILE__)
+require 'smartdict'
+
+module Smartdict
+  extend ActiveSupport::Autoload
+
+  autoload :Gui
+end

@@ -6,19 +6,12 @@ Dir["#{parent_dir}/smartdict-*/lib"].each do |lib_dir|
   $LOAD_PATH.unshift(lib_dir) if Dir.exists?(lib_dir)
 end
 
-
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'rubygems'
-
-# For development
-# require 'bundler'
-# Bundler.setup(:default, :development)
 
 require 'smartdict-core'
 require 'smartdict-icons'
 require 'smartdict-gtk'
 
-Smartdict.env = :user
-
-Smartdict.run
-Smartdict::Gui.run
+args = ARGV.dup
+Smartdict::Gui::Cli.run(args)
