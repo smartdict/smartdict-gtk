@@ -45,9 +45,10 @@ class Smartdict::Gui::WordList < ::Gtk::TreeView
 
   def first_item_matches?(translation)
     iter = @list_model.iter_first
-    translation.word      ==  @list_model.get_value(iter, 0) &&
+    return false unless iter
+    translation.word      == @list_model.get_value(iter, 0) &&
     translation.from_lang == @list_model.get_value(iter, 1) &&
-    translation.to_lang   ==  @list_model.get_value(iter, 2)
+    translation.to_lang   == @list_model.get_value(iter, 2)
   end
 
 end
