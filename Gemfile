@@ -5,8 +5,11 @@ def local_gem(gem_name)
   gem gem_name, :path => path
 end
 
-local_gem "smartdict-core"
-local_gem "smartdict-icons"
+#local_gem "smartdict-core"
+#local_gem "smartdict-icons"
+
+gem "smartdict-core", "~> 0.1.0"
+gem "smartdict-icons"
 
 gem 'gtk2', "1.1.2"
 gem 'activesupport', "~> 3.2.0"
