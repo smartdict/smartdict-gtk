@@ -11,4 +11,8 @@ class Smartdict::Gui::TextView < ::Gtk::TextView
   def show_translation(translation)
     buffer.set_translation(translation)
   end
+
+  def show_error(error)
+    buffer.set_error(error)
+  end
 end

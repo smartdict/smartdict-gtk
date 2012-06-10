@@ -41,14 +41,28 @@ class Smartdict::Gui::WordList < ::Gtk::TreeView
     item[0] = translation.word
     item[1] = translation.from_lang
     item[2] = translation.to_lang
+    selection.select_iter(item)
   end
 
-  def first_item_matches?(translation)
+  def first_item_matches?(word, from_lang, to_lang)
     iter = @list_model.iter_first
     return false unless iter
-    translation.word      == @list_model.get_value(iter, 0) &&
-    translation.from_lang == @list_model.get_value(iter, 1) &&
-    translation.to_lang   == @list_model.get_value(iter, 2)
+    word      == @list_model.get_value(iter, 0) &&
+    from_lang == @list_model.get_value(iter, 1) &&
+    to_lang   == @list_model.get_value(iter, 2)
+  end
+
+  def scroll_up
+    # TODO: It's a dirty hack!
+    # We need just resize WordList and set vadjustment.value = 0.
+    # But WordList is resized after, so I do this hack to make sure
+    # that it's already resized.
+    Thread.new do
+      # Expected to parent be Gtk::ScrolledWindow
+      vad = self.parent.vadjustment
+      vad.value = vad.lower
+      vad.value_changed
+    end
   end
 
 end

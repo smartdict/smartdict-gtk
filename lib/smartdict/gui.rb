@@ -23,7 +23,6 @@ module Smartdict::Gui
   autoload :WordList
 
 
-
   LEFT_BOX_BUTTON_HEIGHT = 36
 
   def run

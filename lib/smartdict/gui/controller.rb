@@ -3,6 +3,8 @@ module Smartdict::Gui
     extend ActiveSupport::Autoload
     autoload :Config
 
+    HISTORY_SIZE_ON_START = 50
+
     attr_reader :main_window, :word_entry, :translate_button, :menu_bar, :text_view, :status_icon,
                 :from_lang_combo_box, :to_lang_combo_box, :interchange_button, :word_list
 
@@ -27,6 +29,8 @@ module Smartdict::Gui
       end
       @interchange_button = InterchangeButton.new(self)
       @word_list          = WordList.new(self)
+
+      load_history
     end
 
     def run
@@ -41,23 +45,28 @@ module Smartdict::Gui
 
     def translate
       word = @word_entry.text.strip.downcase
-      translation = @translator.translate(word)
+      from_lang = @translator.default_opts[:from_lang]
+      to_lang = @translator.default_opts[:to_lang]
+
+      if add_to_history?(word, from_lang, to_lang)
+        translation = @translator.translate(word)
+        add_to_history(translation)
+      else
+        translation = @translator.translate(word, :log => false)
+      end
       @text_view.show_translation(translation)
-      add_to_history(translation)
-    #rescue Smartdict::TranslationNotFound => err
-    #  @text_view.buffer.text = err.message
-    rescue Exception => err
-      msg = "An error occured\n"
-      msg << "#{err.message}\n\n"
-      msg << err.backtrace.join("\n")
-      @text_view.buffer.text = msg
+      @word_list.scroll_up
+    rescue Smartdict::TranslationNotFound => error
+      @text_view.buffer.text = error.message
+    rescue Exception => error
+      @text_view.show_error(error)
     end
 
     # @param [String] word
     # @param [String] from_lang language code
     # @param [String] to_lang language code
     def translate_selected_word(word, from_lang, to_lang)
-      translation = @translator.translate(word)
+      translation = @translator.translate(word, :log => false)
       @text_view.show_translation(translation)
     end
 
@@ -75,7 +84,7 @@ module Smartdict::Gui
 
     def export_translations(format_name, file_path, options = {})
       format = Smartdict::Core::FormatManager.find(format_name)
-      translations = Smartdict::ListBuilder.build(options)
+      translations = Smartdict::Log.fetch(options)
       content = format.format_list(translations)
       File.open(file_path, 'w') { |file| file.write content }
     end
@@ -91,8 +100,20 @@ module Smartdict::Gui
       @config ||= Config.new
     end
 
-    def add_to_history(translation)
-      @word_list.prepend_word(translation) unless @word_list.first_item_matches?(translation)
+    def add_to_history?(word, from_lang, to_lang)
+      !@word_list.first_item_matches?(word, from_lang, to_lang)
     end
+
+    def add_to_history(translation)
+      @word_list.prepend_word(translation)
+    end
+
+    def load_history
+      translations = Smartdict::Log.fetch(:order_desc => true, :limit => HISTORY_SIZE_ON_START)
+      translations.reverse.each do |tr|
+        @word_list.prepend_word(tr)
+      end
+    end
+
   end
 end
