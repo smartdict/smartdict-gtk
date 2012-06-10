@@ -1,4 +1,4 @@
-# smartdict-gtk
+# smartdict-gtk [![Build Status](https://secure.travis-ci.org/smartdict/smartdict-gtk.png)](http://travis-ci.org/smartdict/smartdict-gtk)
 
 By [Sergey Potapov](https://github.com/greyblake)
 
