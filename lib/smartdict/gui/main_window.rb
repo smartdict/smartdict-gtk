@@ -10,7 +10,7 @@ class Smartdict::Gui::MainWindow < ::Gtk::Window
 
     @controller = controller
 
-    signal_connect("delete_event") { @controller.toggle_main_window }
+    signal_connect("delete_event") { @controller.hide_visibility }
     signal_connect("destroy") { @controller.quit }
 
     set_default_size(720, 450)
@@ -63,16 +63,20 @@ class Smartdict::Gui::MainWindow < ::Gtk::Window
 
 
   def toggle_visibility
-    if self.visible? and self.active?
-      @prev_position =  self.position
-      self.hide_all
-    elsif self.visible? and !self.active?
-      self.present
+    if visible? and active?
+      hide_visibility
+    elsif visible? and !active?
+      present
     else
-      self.show_all
-      self.move(*@prev_position)
-      self.present
+     show_all
+     move(*@prev_position)
+     present
     end
+  end
+
+  def hide_visibility
+    @prev_position = position
+    hide_all
   end
 
 end
