@@ -23,7 +23,7 @@ Jeweler::Tasks.new do |gem|
 
 
   gem.files = Dir.glob('./lib/**/*')
-  gem.files += ['./bin/smartdict-gtk', 'GPL-LICENSE.txt']
+  gem.files += ['./bin/smartdict-gtk', 'GPL-LICENSE.txt', 'VERSION']
 end
 Jeweler::RubygemsDotOrgTasks.new
 
