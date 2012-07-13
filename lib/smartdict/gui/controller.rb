@@ -1,12 +1,16 @@
 module Smartdict::Gui
   class Controller
     extend ActiveSupport::Autoload
+    extend Forwardable
+
     autoload :Config
 
     HISTORY_SIZE_ON_START = 50
 
     attr_reader :main_window, :word_entry, :translate_button, :menu_bar, :text_view, :status_icon,
                 :from_lang_combo_box, :to_lang_combo_box, :interchange_button, :word_list
+
+    def_delegators :@main_window, :toggle_visibility, :hide_visibility
 
     def initialize
       @translator = Smartdict::Translator.new(
@@ -68,10 +72,6 @@ module Smartdict::Gui
     def translate_selected_word(word, from_lang, to_lang)
       translation = @translator.translate(word, :log => false)
       @text_view.show_translation(translation)
-    end
-
-    def toggle_main_window
-      @main_window.toggle_visibility
     end
 
     def open_about_window

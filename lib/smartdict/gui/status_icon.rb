@@ -8,7 +8,7 @@ module Smartdict::Gui
       build_menu
       self.pixbuf = Gdk::Pixbuf.new(Smartdict::Icons.logo)
 
-      signal_connect('activate'){@controller.toggle_main_window}
+      signal_connect('activate'){@controller.toggle_visibility}
 
       ##Show menu on rigth click
       self.signal_connect('popup-menu'){|tray, button, time| @menu.popup(nil, nil, button, time)}
