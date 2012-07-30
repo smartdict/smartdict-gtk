@@ -13,6 +13,8 @@ class Smartdict::Gui::MainWindow < ::Gtk::Window
     signal_connect("delete_event") { @controller.hide_visibility }
     signal_connect("destroy") { @controller.quit }
 
+    signal_connect("focus_in_event") { @controller.focus_word_entry }
+
     set_default_size(720, 450)
     set_icon(Smartdict::Icons.logo)
   end

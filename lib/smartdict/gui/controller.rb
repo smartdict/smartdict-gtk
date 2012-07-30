@@ -93,6 +93,10 @@ module Smartdict::Gui
       @to_lang_combo_box.active, @from_lang_combo_box.active = @from_lang_combo_box.active, @to_lang_combo_box.active
     end
 
+    def focus_word_entry
+      @word_entry.activates_default = true
+    end
+
 
     private
 
