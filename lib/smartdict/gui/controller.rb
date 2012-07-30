@@ -94,7 +94,7 @@ module Smartdict::Gui
     end
 
     def focus_word_entry
-      @word_entry.activates_default = true
+      @word_entry.grab_focus
     end
 
 
