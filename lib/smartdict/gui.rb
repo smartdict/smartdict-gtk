@@ -44,13 +44,8 @@ module Smartdict::Gui
   end
 
 
-  def running?
-    !!running_pid
-  end
 
-  def pid_file
-    File.join(Smartdict.user_dir, 'smartdict-gtk.pid')
-  end
+  private
 
   def running_pid
     pid = File.read(pid_file).strip.to_i
@@ -58,5 +53,13 @@ module Smartdict::Gui
     pid
   rescue Errno::ENOENT, Errno::ESRCH
     nil
+  end
+
+  def running?
+    !!running_pid
+  end
+
+  def pid_file
+    File.join(Smartdict.user_dir, 'smartdict-gtk.pid')
   end
 end
