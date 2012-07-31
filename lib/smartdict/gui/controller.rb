@@ -34,6 +34,8 @@ module Smartdict::Gui
       @interchange_button = InterchangeButton.new(self)
       @word_list          = WordList.new(self)
 
+      @db_mutex = Mutex.new
+
       load_history
     end
 
@@ -48,18 +50,21 @@ module Smartdict::Gui
     end
 
     def translate
-      word = @word_entry.text.strip.downcase
-      from_lang = @translator.default_opts[:from_lang]
-      to_lang = @translator.default_opts[:to_lang]
+      safe_concurrent_run do
+        word = @word_entry.text.strip.downcase
+        from_lang = @translator.default_opts[:from_lang]
+        to_lang = @translator.default_opts[:to_lang]
 
-      if add_to_history?(word, from_lang, to_lang)
-        translation = @translator.translate(word)
-        add_to_history(translation)
-      else
-        translation = @translator.translate(word, :log => false)
+        if add_to_history?(word, from_lang, to_lang)
+          translation = @translator.translate(word)
+          add_to_history(translation)
+        else
+          translation = @translator.translate(word, :log => false)
+        end
+
+        @text_view.show_translation(translation)
+        @word_list.scroll_up
       end
-      @text_view.show_translation(translation)
-      @word_list.scroll_up
     rescue Smartdict::TranslationNotFound => error
       @text_view.buffer.text = error.message
     rescue Exception => error
@@ -93,6 +98,10 @@ module Smartdict::Gui
       @to_lang_combo_box.active, @from_lang_combo_box.active = @from_lang_combo_box.active, @to_lang_combo_box.active
     end
 
+    def focus_word_entry
+      @word_entry.grab_focus
+    end
+
 
     private
 
@@ -112,6 +121,14 @@ module Smartdict::Gui
       translations = Smartdict::Log.fetch(:order_desc => true, :limit => HISTORY_SIZE_ON_START)
       translations.reverse.each do |tr|
         @word_list.prepend_word(tr)
+      end
+    end
+
+    def safe_concurrent_run
+      Thread.new do
+        @db_mutex.synchronize do
+          yield
+        end
       end
     end
 
