@@ -10,7 +10,7 @@ module Smartdict::Gui
     attr_reader :main_window, :word_entry, :translate_button, :menu_bar, :text_view, :status_icon,
                 :from_lang_combo_box, :to_lang_combo_box, :interchange_button, :word_list
 
-    def_delegators :@main_window, :toggle_visibility, :hide_visibility
+    def_delegators :@main_window, :toggle_visibility, :hide_visibility, :show_visibility
 
     def initialize
       @translator = Smartdict::Translator.new(

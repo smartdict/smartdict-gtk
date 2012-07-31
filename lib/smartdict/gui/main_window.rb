@@ -70,15 +70,18 @@ class Smartdict::Gui::MainWindow < ::Gtk::Window
     elsif visible? and !active?
       present
     else
-     show_all
-     move(*@prev_position)
-     present
+      show_visibility
     end
+  end
+
+  def show_visibility
+   show_all
+   move(*@prev_position) if @prev_position
+   present
   end
 
   def hide_visibility
     @prev_position = position
     hide_all
   end
-
 end
