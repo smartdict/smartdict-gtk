@@ -34,7 +34,7 @@ module Smartdict::Gui
       @interchange_button = InterchangeButton.new(self)
       @word_list          = WordList.new(self)
 
-      @db_mutex = Mutex.new
+      @mutex = Mutex.new
 
       load_history
     end
@@ -50,25 +50,11 @@ module Smartdict::Gui
     end
 
     def translate
-      safe_concurrent_run do
-        word = @word_entry.text.strip.downcase
-        from_lang = @translator.default_opts[:from_lang]
-        to_lang = @translator.default_opts[:to_lang]
-
-        if add_to_history?(word, from_lang, to_lang)
-          translation = @translator.translate(word)
-          add_to_history(translation)
-        else
-          translation = @translator.translate(word, :log => false)
+      Thread.new do
+        @mutex.synchronize do
+          _translate
         end
-
-        @text_view.show_translation(translation)
-        @word_list.scroll_up
       end
-    rescue Smartdict::TranslationNotFound => error
-      @text_view.buffer.text = error.message
-    rescue Exception => error
-      @text_view.show_error(error)
     end
 
     # @param [String] word
@@ -124,12 +110,24 @@ module Smartdict::Gui
       end
     end
 
-    def safe_concurrent_run
-      Thread.new do
-        @db_mutex.synchronize do
-          yield
-        end
+    def _translate
+      word = @word_entry.text.strip.downcase
+      from_lang = @translator.default_opts[:from_lang]
+      to_lang = @translator.default_opts[:to_lang]
+
+      if add_to_history?(word, from_lang, to_lang)
+        translation = @translator.translate(word)
+        add_to_history(translation)
+      else
+        translation = @translator.translate(word, :log => false)
       end
+
+      @text_view.show_translation(translation)
+      @word_list.scroll_up
+    rescue Smartdict::TranslationNotFound => error
+      @text_view.buffer.text = error.message
+    rescue Exception => error
+      @text_view.show_error(error)
     end
 
   end
