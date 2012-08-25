@@ -21,6 +21,7 @@ module Smartdict::Gui
   autoload :InterchangeButton
   autoload :ExportDialog
   autoload :WordList
+  autoload :StatusBar
 
 
   LEFT_BOX_BUTTON_HEIGHT = 36

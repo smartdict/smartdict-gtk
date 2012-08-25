@@ -3,7 +3,7 @@ class Smartdict::Gui::MainWindow < ::Gtk::Window
 
   def_delegators :@controller, :menu_bar, :word_entry, :translate_button, :text_view,
 			       :from_lang_combo_box, :to_lang_combo_box, :interchange_button,
-                               :word_list
+                               :word_list, :status_bar
 
   def initialize(controller)
     super("Smartdict")
@@ -58,7 +58,7 @@ class Smartdict::Gui::MainWindow < ::Gtk::Window
       add_child(Gtk::Builder.new, right_scrolled_win)
 
     main_box.add(main_hpaned)
-    #main_box.pack_start(@status_bar, false,false)
+    main_box.pack_start(status_bar, false, false)
 
     add(main_box)
   end
