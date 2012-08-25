@@ -12,10 +12,12 @@ end
 require 'rake'
 
 require 'jeweler'
+require 'smartdict-core'
+
 Jeweler::Tasks.new do |gem|
   gem.name        = "smartdict-gtk"
-  gem.homepage    = "http://github.com/greyblake/smartdict-gtk"
-  gem.license     = "MIT"
+  gem.homepage    = Smartdict.info.url
+  gem.license     = "GPL"
   gem.summary     = %Q{GTK GUI for Smartdict dictionary}
   gem.description = %Q{GTK GUI for Smartdict dictionary}
   gem.email       = "blake131313@gmail.com"

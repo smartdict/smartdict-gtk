@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "smartdict-gtk"
-  s.version = "0.1.2"
+  s.version = "0.1.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Sergey Potapov"]
-  s.date = "2012-07-31"
+  s.date = "2012-08-25"
   s.description = "GTK GUI for Smartdict dictionary"
   s.email = "blake131313@gmail.com"
   s.executables = ["smartdict-gtk"]
@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
     "./lib/smartdict/gui/lang_combo_box.rb",
     "./lib/smartdict/gui/main_window.rb",
     "./lib/smartdict/gui/menu_bar.rb",
+    "./lib/smartdict/gui/status_bar.rb",
     "./lib/smartdict/gui/status_icon.rb",
     "./lib/smartdict/gui/text_view.rb",
     "./lib/smartdict/gui/text_view/buffer.rb",
@@ -40,8 +41,8 @@ Gem::Specification.new do |s|
     "GPL-LICENSE.txt",
     "VERSION"
   ]
-  s.homepage = "http://github.com/greyblake/smartdict-gtk"
-  s.licenses = ["MIT"]
+  s.homepage = "http://smartdict.net"
+  s.licenses = ["GPL"]
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.24"
   s.summary = "GTK GUI for Smartdict dictionary"
