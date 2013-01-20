@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "smartdict-gtk"
-  s.version = "0.1.4"
+  s.version = "0.1.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Sergey Potapov"]
-  s.date = "2012-08-25"
+  s.date = "2013-01-20"
   s.description = "GTK GUI for Smartdict dictionary"
   s.email = "blake131313@gmail.com"
   s.executables = ["smartdict-gtk"]
@@ -58,8 +58,9 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<dm-enum>, [">= 0"])
       s.add_runtime_dependency(%q<builder>, [">= 0"])
       s.add_development_dependency(%q<rspec>, ["~> 2.7"])
-      s.add_development_dependency(%q<bundler>, ["~> 1.1.2"])
+      s.add_development_dependency(%q<bundler>, ["~> 1.2"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.6.4"])
+      s.add_development_dependency(%q<pry>, [">= 0"])
       s.add_development_dependency(%q<aruba>, ["= 0.4.11"])
     else
       s.add_dependency(%q<smartdict-core>, ["~> 0.1.0"])
@@ -69,8 +70,9 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<dm-enum>, [">= 0"])
       s.add_dependency(%q<builder>, [">= 0"])
       s.add_dependency(%q<rspec>, ["~> 2.7"])
-      s.add_dependency(%q<bundler>, ["~> 1.1.2"])
+      s.add_dependency(%q<bundler>, ["~> 1.2"])
       s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
+      s.add_dependency(%q<pry>, [">= 0"])
       s.add_dependency(%q<aruba>, ["= 0.4.11"])
     end
   else
@@ -81,8 +83,9 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<dm-enum>, [">= 0"])
     s.add_dependency(%q<builder>, [">= 0"])
     s.add_dependency(%q<rspec>, ["~> 2.7"])
-    s.add_dependency(%q<bundler>, ["~> 1.1.2"])
+    s.add_dependency(%q<bundler>, ["~> 1.2"])
     s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
+    s.add_dependency(%q<pry>, [">= 0"])
     s.add_dependency(%q<aruba>, ["= 0.4.11"])
   end
 end
