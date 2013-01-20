@@ -145,6 +145,8 @@ module Smartdict::Gui
       yield
     rescue Smartdict::TranslationNotFound => error
       @text_view.buffer.text = error.message
+    rescue SocketError => error
+      @text_view.buffer.text = "Socket error occurred. Please verify your network connection."
     rescue Exception => error
       @text_view.show_error(error)
     end
